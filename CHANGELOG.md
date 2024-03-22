@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [1.1.3](https://github.com/hey-car/action-bootstrap/compare/v1.1.2...v1.1.3) (2024-03-22)
+
+
+### Bug Fixes
+
+* correct action syntax ([01056ee](https://github.com/hey-car/action-bootstrap/commit/01056ee1f68e61d4be91d5f766ffde57a6c7cfce))
+
 ### [1.1.2](https://github.com/hey-car/action-bootstrap/compare/v1.1.1...v1.1.2) (2024-03-22)
 
 
