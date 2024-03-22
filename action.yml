@@ -7,7 +7,8 @@ description: |
 
 inputs:
   ecr-repo-name:
-    required: true
+    required: false
+    default: ''
   role-to-assume:
     required: true
   role-session-name:
