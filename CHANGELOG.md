@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [1.1.1](https://github.com/hey-car/action-bootstrap/compare/v1.1.0...v1.1.1) (2024-03-22)
+
+
+### Bug Fixes
+
+* default value for ecr-repo-name input ([2d8d9ba](https://github.com/hey-car/action-bootstrap/commit/2d8d9ba6f6a9ec83b421ffaa042f8473b38447c6))
+
 ## [1.1.0](https://github.com/hey-car/action-bootstrap/compare/v1.0.1...v1.1.0) (2024-03-22)
 
 
