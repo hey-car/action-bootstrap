@@ -17,11 +17,22 @@ inputs:
   aws-account-id:
     required: true
 
+outputs:
+  ecr-repo-name:
+    description: 'The generated ECR repository name'
+  semver-static:
+    description: 'The semantic version'
+  semver-list:
+    description: 'A list of tags that apply to the current version'
+  docker-tags-list:
+    description: 'A list of docker image tags with versions'
+
 runs:
   using: 'composite'
   steps:
     - name: Checkout
       uses: actions/checkout@v4
+      if: ${{ !(github.event_name == pull_request && (github.event.action == "closed" || github.event.action == "unlabeled")) }}
       with:
         persist-credentials: false
         fetch-depth: 0
@@ -43,3 +54,10 @@ runs:
         else
           echo "ecr-repo-name=${{inputs.aws-account-id}}.dkr.ecr.${{ inputs.aws-region }}.amazonaws.com/image/${{ inputs.ecr-repo-name }}" >>"${GITHUB_OUTPUT}" 
         fi
+    - name: Tag Generator
+      id: tags
+      if: ${{ !(github.event_name == pull_request && (github.event.action == "closed" || github.event.action == "unlabeled")) }}
+      uses: hey-car/action-tag-maker@v1.1.6
+      with:
+        docker-image-name: "${{ steps.img-name.outputs.ecr-repo-name }}"
+        pr-number: "${{ github.event.pull_request.number }}"
