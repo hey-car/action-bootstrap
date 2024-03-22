@@ -36,6 +36,7 @@ runs:
       uses: aws-actions/amazon-ecr-login@v2
     - name: Image Name
       id: img-name
+      shell: bash
       run: |
         if [[ "${{ github.event_name }}" == "pull_request" ]]; then
           echo "ecr-repo-name=${{inputs.aws-account-id}}.dkr.ecr.${{ inputs.aws-region }}.amazonaws.com/alpha-image/${{ inputs.ecr-repo-name }}" >>"${GITHUB_OUTPUT}" 
