@@ -27,6 +27,7 @@ outputs:
     description: 'A list of tags that apply to the current version'
   docker-tags-list:
     description: 'A list of docker image tags with versions'
+    value: ${{ steps.tags.outputs.docker-tags-list }}
 
 runs:
   using: 'composite'
