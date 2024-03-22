@@ -33,7 +33,7 @@ runs:
   steps:
     - name: Checkout
       uses: actions/checkout@v4
-      if: (!(github.event_name == pull_request && (github.event.action == closed || github.event.action == unlabeled)))
+      if: (!(github.event_name == 'pull_request' && (github.event.action == 'closed' || github.event.action == 'unlabeled')))
       with:
         persist-credentials: false
         fetch-depth: 0
@@ -57,7 +57,7 @@ runs:
         fi
     - name: Tag Generator
       id: tags
-      if: (!(github.event_name == pull_request && (github.event.action == closed || github.event.action == unlabeled)))
+      if: (!(github.event_name == 'pull_request' && (github.event.action == 'closed' || github.event.action == 'unlabeled')))
       uses: hey-car/action-tag-maker@v1.1.6
       with:
         docker-image-name: "${{ steps.img-name.outputs.ecr-repo-name }}"
