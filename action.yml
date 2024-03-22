@@ -1,39 +1,44 @@
-name: Some action # TODO(user): Replace this with your action name
+name: Action Bootstrap
 branding:
   icon: arrow-right-circle
   color: gray-dark
-description: | # TODO(user): replace this with your action description
-  This action does something
+description: |
+  This action performs git repo checkout, configures AWS credentials, logs into ECR and generates the image name
 
 inputs:
-  debug-mode:
-    description: Set to true for verbose execution when debugging
-    required: false
-    default: 'false'
-  log-level:
-    description: The log level to use for the execution
-    required: false
-    default: 'info'
-  log-timestamped:
-    description: Set to true in order to enable timestamps on log messages
-    required: false
-    default: 'true'
-  # TODO(user): Specify your inputs here
-  input-name:
-    description: Some input description
+  ecr-repo-name:
+    required: true
+  role-to-assume:
+    required: true
+  role-session-name:
+    required: true
+  aws-region:
+    required: true
+  aws-account-id:
     required: true
 
-# TODO(user): Define your outputs here
-outputs:
-  some-output:
-    description: 'Some output description'
-
 runs:
-  using: 'docker'
-  image: Dockerfile
-  env:
-    DEBUG_MODE: ${{ inputs.debug-mode }}
-    LOG_LEVEL: ${{ inputs.log-level }}
-    LOG_TIMESTAMPED: ${{ inputs.log-timestamped }}
-    # TODO(user): Define your environment variables here
-    SOME_INPUT: ${{ inputs.input-name }}
+  using: 'composite'
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        persist-credentials: false
+        fetch-depth: 0
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4.0.2
+      with:
+        role-to-assume: ${{ inputs.role-to-assume }}
+        role-session-name: ${{ inputs.role-session-name }}
+        aws-region: ${{ inputs.aws-region }}
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v2
+    - name: Image Name
+      id: img-name
+      run: |
+        if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+          echo "ecr-repo-name=${{inputs.aws-account-id}}.dkr.ecr.${{ inputs.aws-region }}.amazonaws.com/alpha-image/${{ inputs.ecr-repo-name }}" >>"${GITHUB_OUTPUT}" 
+        else
+          echo "ecr-repo-name=${{inputs.aws-account-id}}.dkr.ecr.${{ inputs.aws-region }}.amazonaws.com/image/${{ inputs.ecr-repo-name }}" >>"${GITHUB_OUTPUT}" 
+        fi
