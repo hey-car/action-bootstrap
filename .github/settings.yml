@@ -1,9 +1,9 @@
 ---
 repository:
-  name: actions-template
+  name: action-bootstrap
   description: |
-    A Github template repo for public Gh Actions
-  topics: github, actions, ci, scripts
+    A Github action to perform common tasks for build pipelines.
+  topics: github, actions, ci, scripts, ecr, docker
   default_branch: master
 
   private: true

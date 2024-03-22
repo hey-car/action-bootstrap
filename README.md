@@ -1,3 +1,3 @@
-# actions-template
+# action-bootstrap
 
-Template repo for github actions
+A Github action to perform common tasks for build pipelines
