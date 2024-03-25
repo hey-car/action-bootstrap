@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [1.1.6](https://github.com/hey-car/action-bootstrap/compare/v1.1.5...v1.1.6) (2024-03-25)
+
+
+### Bug Fixes
+
+* fixed outputs passthrough issue ([945bd15](https://github.com/hey-car/action-bootstrap/commit/945bd158a2e2d665e1956f7dbdf2c89aa8760ad7))
+
 ### [1.1.5](https://github.com/hey-car/action-bootstrap/compare/v1.1.4...v1.1.5) (2024-03-22)
 
 
