@@ -21,12 +21,16 @@ inputs:
 outputs:
   ecr-repo-name:
     description: 'The generated ECR repository name'
+    value: '${{ steps.img-name.outputs.ecr-repo-name }}'
   semver-static:
     description: 'The semantic version'
+    value: '${{ steps.tags.outputs.semver-static }}'
   semver-list:
     description: 'A list of tags that apply to the current version'
+    value: '${{ steps.tags.outputs.semver-list }}'
   docker-tags-list:
     description: 'A list of docker image tags with versions'
+    value: '${{ steps.tags.outputs.docker-tags-list }}'
 
 runs:
   using: 'composite'
