@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.0](https://github.com/hey-car/action-bootstrap/compare/v1.1.6...v1.2.0) (2024-03-26)
+
+
+### Features
+
+* substituted tag maker with docker meta ([9d9bc94](https://github.com/hey-car/action-bootstrap/commit/9d9bc94f2022896a99751b02d6f05c5be738f81d))
+
 ### [1.1.6](https://github.com/hey-car/action-bootstrap/compare/v1.1.5...v1.1.6) (2024-03-25)
 
 
