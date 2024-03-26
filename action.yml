@@ -8,29 +8,35 @@ description: |
 inputs:
   ecr-repo-name:
     required: false
+    description: the name of the docker image to configure
     default: ''
-  role-to-assume:
-    required: true
-  role-session-name:
-    required: true
-  aws-region:
-    required: true
   aws-account-id:
     required: true
+    description: 'aws-account-id to configure'
+  role-to-assume:
+    required: true
+    description: 'role-to-assume to configure'
+  role-session-name:
+    required: true
+    description: 'role-session-name to configure'
+  aws-region:
+    required: true
+    description: 'aws-region to configure'
 
 outputs:
   ecr-repo-name:
     description: 'The generated ECR repository name'
     value: '${{ steps.img-name.outputs.ecr-repo-name }}'
-  semver-static:
-    description: 'The semantic version'
-    value: '${{ steps.tags.outputs.semver-static }}'
-  semver-list:
-    description: 'A list of tags that apply to the current version'
-    value: '${{ steps.tags.outputs.semver-list }}'
-  docker-tags-list:
-    description: 'A list of docker image tags with versions'
-    value: '${{ steps.tags.outputs.docker-tags-list }}'
+  app-version:
+    description: 'The current project version'
+    value: '${{ steps.meta.outputs.version }}'
+  docker-labels:
+    description: 'The labels of the docker image'
+    value: '${{ steps.meta.outputs.labels }}'
+  docker-tags:
+    description: 'The tags of the docker image'
+    value: '${{ steps.meta.outputs.tags }}'
+
 
 runs:
   using: 'composite'
@@ -59,10 +65,15 @@ runs:
         else
           echo "ecr-repo-name=${{inputs.aws-account-id}}.dkr.ecr.${{ inputs.aws-region }}.amazonaws.com/image/${{ inputs.ecr-repo-name }}" >>"${GITHUB_OUTPUT}" 
         fi
-    - name: Tag Generator
-      id: tags
+    - name: Docker meta
+      id: meta
+      uses: docker/metadata-action@v5
       if: (!(github.event_name == 'pull_request' && (github.event.action == 'closed' || github.event.action == 'unlabeled')))
-      uses: hey-car/action-tag-maker@v1.1.6
       with:
-        docker-image-name: "${{ steps.img-name.outputs.ecr-repo-name }}"
-        pr-number: "${{ github.event.pull_request.number }}"
+        images: |
+          ${{ steps.img-name.outputs.ecr-repo-name }}
+        tags: |
+          type=ref,event=branch
+          type=ref,event=pr,suffix=-{{sha}}
+          type=semver,pattern={{version}}
+          type=semver,pattern={{major}}.{{minor}}
