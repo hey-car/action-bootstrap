@@ -22,6 +22,10 @@ inputs:
   aws-region:
     required: true
     description: 'aws-region to configure'
+  checkout-depth:
+    required: false
+    description: 'The checkout depth. Set to 0 to have a full checkout'
+    default: '1'
 
 outputs:
   ecr-repo-name:
@@ -46,7 +50,7 @@ runs:
       if: (!(github.event_name == 'pull_request' && (github.event.action == 'closed' || github.event.action == 'unlabeled')))
       with:
         persist-credentials: false
-        fetch-depth: 0
+        fetch-depth: ${{ inputs.checkout-depth }}
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v4.0.2
       with:
