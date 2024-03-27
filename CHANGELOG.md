@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [1.2.1](https://github.com/hey-car/action-bootstrap/compare/v1.2.0...v1.2.1) (2024-03-27)
+
+
+### Bug Fixes
+
+* fixed docker tag build semver prefix ([431247b](https://github.com/hey-car/action-bootstrap/commit/431247b9c8930ebd31d79289fe267ddada0275a7))
+
 ## [1.2.0](https://github.com/hey-car/action-bootstrap/compare/v1.1.6...v1.2.0) (2024-03-26)
 
 
