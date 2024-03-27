@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [1.2.2](https://github.com/hey-car/action-bootstrap/compare/v1.2.1...v1.2.2) (2024-03-27)
+
+
+### Bug Fixes
+
+* enabled shallow checkouts ([654973a](https://github.com/hey-car/action-bootstrap/commit/654973a2b4bf08449bfb1a34a371f0603a66ed0e))
+
 ### [1.2.1](https://github.com/hey-car/action-bootstrap/compare/v1.2.0...v1.2.1) (2024-03-27)
 
 
