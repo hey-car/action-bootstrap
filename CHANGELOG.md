@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.0](https://github.com/hey-car/action-bootstrap/compare/v1.2.3...v1.3.0) (2024-04-08)
+
+
+### Features
+
+* add action-tagger ([915a2d1](https://github.com/hey-car/action-bootstrap/commit/915a2d1060a34af65a4debe441e0b7768101385b))
+
 ### [1.2.2](https://github.com/hey-car/action-bootstrap/compare/v1.2.1...v1.2.2) (2024-03-27)
 
 
