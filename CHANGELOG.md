@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.0](https://github.com/hey-car/action-bootstrap/compare/v1.3.0...v1.4.0) (2024-04-08)
+
+
+### Features
+
+* remove conflicting trigger ([81f776a](https://github.com/hey-car/action-bootstrap/commit/81f776a9a58f453992d451bde6334e4f8c9532d8))
+
 ## [1.3.0](https://github.com/hey-car/action-bootstrap/compare/v1.2.3...v1.3.0) (2024-04-08)
 
 
