@@ -67,7 +67,7 @@ runs:
         role-session-name: ${{ inputs.role-session-name }}
         aws-region: ${{ inputs.aws-region }}
 
-    - name Load AWS Secrets
+    - name: Load AWS Secrets
       if: ${{ inputs.load-secrets }}
       uses: aws-actions/aws-secretsmanager-get-secrets@v2
       with:
