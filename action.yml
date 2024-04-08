@@ -33,7 +33,7 @@ inputs:
   secret-names:
     required: false
     description: 'The names of the secrets to pull values from'
-    default: '[]' # Required format: '[",github-actions-group-prod", ",github-actions-uk-m-a-prod"]'
+    default: '' # Required format: '[",github-actions-group-prod", ",github-actions-uk-m-a-prod"]'
 
 outputs:
   ecr-repo-name:
@@ -71,7 +71,7 @@ runs:
       if: ${{ inputs.load-secrets }}
       uses: aws-actions/aws-secretsmanager-get-secrets@v2
       with:
-        secret-ids: fromJSON(${{ inputs.secret-names }})
+        secret-ids: ${{ inputs.secret-names }}
         parse-json-secrets: true
 
     - name: Login to Amazon ECR
