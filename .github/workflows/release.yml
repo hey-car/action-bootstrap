@@ -4,7 +4,7 @@ name: Release
 on:
   push:
     branches:
-      - TECH-3177
+      - master
 
 jobs:
   release:
