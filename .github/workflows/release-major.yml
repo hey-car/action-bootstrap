@@ -1,5 +1,5 @@
 ---
-name: Keep the versions up-to-date
+name: Update major version tag
 
 on:
   release: 
