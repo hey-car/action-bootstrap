@@ -71,7 +71,7 @@ runs:
       if: ${{ inputs.load-secrets }}
       uses: aws-actions/aws-secretsmanager-get-secrets@v2
       with:
-        secret-ids: ${{ fromJSON(github.event.inputs.secret-names) }}
+        secret-ids: ${{ fromJSON(inputs.secret-names) }}
         parse-json-secrets: true
 
     - name: Login to Amazon ECR
