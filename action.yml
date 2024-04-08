@@ -26,6 +26,14 @@ inputs:
     required: false
     description: 'The checkout depth. Set to 0 to have a full checkout'
     default: '1'
+  load-secrets:
+    required: false
+    description: 'Load secrets from AWS secrets manager as environment variables'
+    default: false
+  secret-names:
+    required: false
+    description: 'The names of the secrets to pull values from'
+    default: '[]' # Required format: '[",github-actions-group-prod", ",github-actions-uk-m-a-prod"]'
 
 outputs:
   ecr-repo-name:
@@ -51,15 +59,25 @@ runs:
       with:
         persist-credentials: false
         fetch-depth: ${{ inputs.checkout-depth }}
+
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v4.0.2
       with:
         role-to-assume: ${{ inputs.role-to-assume }}
         role-session-name: ${{ inputs.role-session-name }}
         aws-region: ${{ inputs.aws-region }}
+
+    - name Load AWS Secrets
+      if: ${{ inputs.load-secrets }}
+      uses: aws-actions/aws-secretsmanager-get-secrets@v2
+      with:
+        secret-ids: ${{ fromJSON(github.event.inputs.secret-names) }}
+        parse-json-secrets: true
+
     - name: Login to Amazon ECR
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v2
+
     - name: Image Name
       id: img-name
       shell: bash
@@ -69,6 +87,7 @@ runs:
         else
           echo "ecr-repo-name=${{inputs.aws-account-id}}.dkr.ecr.${{ inputs.aws-region }}.amazonaws.com/image/${{ inputs.ecr-repo-name }}" >>"${GITHUB_OUTPUT}" 
         fi
+
     - name: Docker meta
       id: meta
       uses: docker/metadata-action@v5
