@@ -29,11 +29,11 @@ inputs:
   load-secrets:
     required: false
     description: 'Load secrets from AWS secrets manager as environment variables'
-    default: false
+    default: 'false'
   secret-names:
     required: false
     description: 'The names of the secrets to pull values from'
-    default: '' # Required format: '[",github-actions-group-prod", ",github-actions-uk-m-a-prod"]'
+    default: ''
 
 outputs:
   ecr-repo-name:
@@ -68,7 +68,8 @@ runs:
         aws-region: ${{ inputs.aws-region }}
 
     - name: Load AWS Secrets
-      if: ${{ inputs.load-secrets }}
+      id: load-secrets
+      if: ${{ inputs.load-secrets == 'true' }}
       uses: aws-actions/aws-secretsmanager-get-secrets@v2
       with:
         secret-ids: ${{ inputs.secret-names }}
