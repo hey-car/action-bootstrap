@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.5.0](https://github.com/hey-car/action-bootstrap/compare/v1.4.0...v1.5.0) (2024-04-09)
+
+
+### Features
+
+* create env vars from AWS secrets ([79a5b54](https://github.com/hey-car/action-bootstrap/commit/79a5b547529f0d3626e19156da5b794ddd75c7a1))
+
+
+### Bug Fixes
+
+* typo ([7e2f586](https://github.com/hey-car/action-bootstrap/commit/7e2f58672b9e3798b6ff914aaeb205764889bd0d))
+
 ## [1.4.0](https://github.com/hey-car/action-bootstrap/compare/v1.3.0...v1.4.0) (2024-04-08)
 
 
