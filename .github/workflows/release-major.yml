@@ -2,8 +2,9 @@
 name: Update major version tag
 
 # on:
-#   release:
-#     types: [released]
+#   push:
+#     tags:
+#       - 'v*.*.*'
 
 on:
   pull_request:
@@ -29,9 +30,10 @@ jobs:
           _commit_sha="dd6bbe3d4c21ac7fc5991403123cddd59fe06866"
 
           # delete major version tag if exists
+          echo "Attempting to delete major version tag ${_major_tag}..."
           gh release delete "${_major_tag}" --repo ${REPO} --cleanup-tag -y || echo "No major version tag to delete"
 
-          # create major version tag
+          echo "Creating major version tag ${_major_tag} for commit ${_commit_sha}..."
           gh release create "${_major_tag}" --repo ${REPO} --target "${_commit_sha}" --generate-notes --latest
           
 
