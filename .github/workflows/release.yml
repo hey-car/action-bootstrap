@@ -3,9 +3,9 @@ name: Release
 
 on:
   push:
-    branches:
-      - master
-    tags-ignore:
+    branches-ignore:    
+      - '!master'
+    tags-ignore:        
       - '**'
 
 jobs:
