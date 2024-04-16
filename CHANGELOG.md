@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [1.7.2](https://github.com/hey-car/action-bootstrap/compare/v1.7.1...v1.7.2) (2024-04-16)
+
+
+### Bug Fixes
+
+* avoid duplicate release workflow ([badd83b](https://github.com/hey-car/action-bootstrap/commit/badd83bd27d2519569ae425491f3d0c49a7ec39c))
+
 ### [1.7.1](https://github.com/hey-car/action-bootstrap/compare/v1.7.0...v1.7.1) (2024-04-16)
 
 
