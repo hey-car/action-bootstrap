@@ -23,5 +23,7 @@ jobs:
           echo "Attempting to delete major version tag ${_major_tag}..."
           gh release delete "${_major_tag}" --repo ${REPO} --cleanup-tag -y || echo "No major version tag to delete"
 
+          sleep 5 # https://github.com/cli/cli/issues/8458
+
           echo "Creating major version tag ${_major_tag} for commit ${COMMIT_SHA}..."
           gh release create "${_major_tag}" --repo ${REPO} --target ${COMMIT_SHA} --generate-notes --latest
