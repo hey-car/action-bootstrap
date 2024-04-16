@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.9.0](https://github.com/hey-car/action-bootstrap/compare/v1.8.0...v1.9.0) (2024-04-16)
+
+
+### Features
+
+* **TECH:** update readme ([f69b208](https://github.com/hey-car/action-bootstrap/commit/f69b2083bfc999ae8a24457882527a7f703ddb61))
+
 ## [1.8.0](https://github.com/hey-car/action-bootstrap/compare/v1.7.3...v1.8.0) (2024-04-16)
 
 
