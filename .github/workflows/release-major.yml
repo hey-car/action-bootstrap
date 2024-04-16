@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   actions-tagger:
-    runs-on: small
+    runs-on: ubuntu-latest
     steps:
       
       # - name: Checkout repo
