@@ -4,7 +4,7 @@ name: Update major version tag
 # on:
 #   push:
 #     tags:
-#       - 'v*.*.*'
+#       - 'v[0-9]+.[0-9]+.[0-9]+'
 
 on:
   pull_request:
@@ -27,7 +27,7 @@ jobs:
           # _commit_sha="${{ github.event.release.target_commitish }}"
 
           _major_tag="v1"
-          _commit_sha="dd6bbe3d4c21ac7fc5991403123cddd59fe06866"
+          _commit_sha="eeed1486b55de3d128ec8a3ff5131613c5f9fe8b"
 
           # delete major version tag if exists
           echo "Attempting to delete major version tag ${_major_tag}..."
