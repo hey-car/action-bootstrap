@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [1.6.2](https://github.com/hey-car/action-bootstrap/compare/v1.6.1...v1.6.2) (2024-04-16)
+
+
+### Bug Fixes
+
+* remove ci bypass ([91db2df](https://github.com/hey-car/action-bootstrap/commit/91db2dfbe7dfd307ddde8278c6932f4c967fc833))
+
 ## [1.6.0](https://github.com/hey-car/action-bootstrap/compare/v1.5.0...v1.6.0) (2024-04-16)
 
 
