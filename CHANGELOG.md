@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.10.0](https://github.com/hey-car/action-bootstrap/compare/v1.9.0...v1.10.0) (2024-04-16)
+
+
+### Features
+
+* conditionally disable ecr-login ([2505555](https://github.com/hey-car/action-bootstrap/commit/2505555319e6cf01ff2201195bee5e685bd636a6))
+
 ## [1.9.0](https://github.com/hey-car/action-bootstrap/compare/v1.8.0...v1.9.0) (2024-04-16)
 
 
