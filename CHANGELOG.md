@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.7.0](https://github.com/hey-car/action-bootstrap/compare/v1.6.3...v1.7.0) (2024-04-16)
+
+
+### Features
+
+* update readme ([42af300](https://github.com/hey-car/action-bootstrap/commit/42af3003c7a80195af77d180ea7fc4da0238f13f))
+
 ### [1.6.3](https://github.com/hey-car/action-bootstrap/compare/v1.6.2...v1.6.3) (2024-04-16)
 
 
