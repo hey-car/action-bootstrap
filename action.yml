@@ -6,6 +6,10 @@ description: |
   This action performs git repo checkout, configures AWS credentials, logs into ECR and generates the image name
 
 inputs:
+  run-tag-generator:
+    description: Set to false to not run docker meta
+    required: false
+    default: 'true'
   ecr-repo-name:
     required: false
     description: the name of the docker image to configure
@@ -82,6 +86,7 @@ runs:
     - name: Image Name
       id: img-name
       shell: bash
+      if: inputs.run-tag-generator == 'true'
       run: |
         if [[ "${{ github.event_name }}" == "pull_request" ]]; then
           echo "ecr-repo-name=${{inputs.aws-account-id}}.dkr.ecr.${{ inputs.aws-region }}.amazonaws.com/alpha-image/${{ inputs.ecr-repo-name }}" >>"${GITHUB_OUTPUT}" 
@@ -92,7 +97,7 @@ runs:
     - name: Docker meta
       id: meta
       uses: docker/metadata-action@v5
-      if: (!(github.event_name == 'pull_request' && (github.event.action == 'closed' || github.event.action == 'unlabeled')))
+      if: ((!(github.event_name == 'pull_request' && (github.event.action == 'closed' || github.event.action == 'unlabeled'))) && inputs.run-tag-generator == 'true')
       with:
         images: |
           ${{ steps.img-name.outputs.ecr-repo-name }}
