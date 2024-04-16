@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.8.0](https://github.com/hey-car/action-bootstrap/compare/v1.7.3...v1.8.0) (2024-04-16)
+
+
+### Features
+
+* added condition trigger for tag generator ([#25](https://github.com/hey-car/action-bootstrap/issues/25)) ([9dd0f84](https://github.com/hey-car/action-bootstrap/commit/9dd0f8440769f707992d2a4b7edffc39ede8f18a))
+
 ### [1.7.3](https://github.com/hey-car/action-bootstrap/compare/v1.7.2...v1.7.3) (2024-04-16)
 
 
