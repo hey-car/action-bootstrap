@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.11.0](https://github.com/hey-car/action-bootstrap/compare/v1.10.0...v1.11.0) (2024-04-16)
+
+
+### Features
+
+* **TECH:** change on push logic ([809a2dd](https://github.com/hey-car/action-bootstrap/commit/809a2dd16720fa12bb9f91c96e79d2d601b8757c))
+
 ## [1.10.0](https://github.com/hey-car/action-bootstrap/compare/v1.9.0...v1.10.0) (2024-04-16)
 
 
