@@ -30,13 +30,15 @@ jobs:
           # _major_tag="$(echo ${{ github.event.release.tag_name }} | cut -d. -f1)"
           # _commit_sha="${{ github.event.release.target_commitish }}"
 
+          echo "This repo is ${{ github.action_repository }}"
+
           _major_tag="v1"
           _commit_sha="dd6bbe3d4c21ac7fc5991403123cddd59fe06866"
 
           # delete major version tag if exists
-          gh release delete "${_major_tag}" --cleanup-tag -y
+          gh release delete "${_major_tag}" --repo heycar/action-bootstrap --cleanup-tag -y
 
           # create major version tag
-          gh release create "${_major_tag}" --target "${_commit_sha}" --generate-notes --latest
+          gh release create "${_major_tag}" --repo heycar/action-bootstrap --target "${_commit_sha}" --generate-notes --latest
           
 
