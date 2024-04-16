@@ -17,31 +17,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       
-      # - name: Checkout repo
-      #   uses: actions/checkout@v4
-      #   with:
-      #     persist-credentials: false
-      #     fetch-depth: 0
-      
       - name: Update major tag
         env:
           GH_TOKEN: ${{ secrets.VERSIONING_TOKEN }}
-          REPO: ${{ github.action_repository }}"
-          REPO2: ${{ github.repository }}"
+          REPO: ${{ github.repository }}"
         run: |
           # _major_tag="$(echo ${{ github.event.release.tag_name }} | cut -d. -f1)"
           # _commit_sha="${{ github.event.release.target_commitish }}"
-
-          echo "This repo is ${REPO}"
-          echo "This repo is ${REPO2}"
 
           _major_tag="v1"
           _commit_sha="dd6bbe3d4c21ac7fc5991403123cddd59fe06866"
 
           # delete major version tag if exists
-          gh release delete "${_major_tag}" --repo hey-car/action-bootstrap --cleanup-tag -y || echo "No major version tag to delete"
+          gh release delete "${_major_tag}" --repo ${REPO} --cleanup-tag -y || echo "No major version tag to delete"
 
           # create major version tag
-          gh release create "${_major_tag}" --repo hey-car/action-bootstrap --target "${_commit_sha}" --generate-notes --latest
+          gh release create "${_major_tag}" --repo ${REPO} --target "${_commit_sha}" --generate-notes --latest
           
 
