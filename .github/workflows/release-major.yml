@@ -1,18 +1,40 @@
 ---
 name: Update major version tag
 
+# on:
+#   release:
+#     types: [released]
+
 on:
-  release: 
-    types:
-      - released
-      - edited
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: write
 
 jobs:
   actions-tagger:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
+    runs-on: small
     steps:
-      - uses: Actions-R-Us/actions-tagger@v2
-        with:
-          token: ${{ secrets.VERSIONING_TOKEN }}
+      
+      # - name: Checkout repo
+      #   uses: actions/checkout@v4
+      #   with:
+      #     persist-credentials: false
+      #     fetch-depth: 0
+      
+      - name: Update major tag
+        run: |
+          # _major_tag="$(echo ${{ github.event.release.tag_name }} | cut -d. -f1)"
+          # _commit_sha="${{ github.event.release.target_commitish }}"
+
+          _major_tag="v1"
+          _commit_sha="dd6bbe3d4c21ac7fc5991403123cddd59fe06866"
+
+          # delete major version tag if exists
+          gh release delete "${_major_tag}" --cleanup-tag -y
+
+          # create major version tag
+          gh release create "${_major_tag}" --target "${_commit_sha}" --generate-notes --latest
+          
+
