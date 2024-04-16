@@ -20,7 +20,7 @@ jobs:
       - name: Update major tag
         env:
           GH_TOKEN: ${{ secrets.VERSIONING_TOKEN }}
-          REPO: ${{ github.repository }}"
+          REPO: ${{ github.repository }}
         run: |
           # _major_tag="$(echo ${{ github.event.release.tag_name }} | cut -d. -f1)"
           # _commit_sha="${{ github.event.release.target_commitish }}"
