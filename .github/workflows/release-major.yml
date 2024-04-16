@@ -15,13 +15,13 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.VERSIONING_TOKEN }}
           REPO: ${{ github.repository }}
-          TAG: "${{ github.event.push.ref }}"
+          TAG: "${{ github.event.ref }}"
+          COMMIT_SHA: "${{ github.event.after }}"
         run: |
           _major_tag="$(echo ${TAG} | cut -d/ -f3 | cut -d. -f1)"
-          _commit_sha="${{ github.event.push.after }}"
 
           echo "Attempting to delete major version tag ${_major_tag}..."
           gh release delete "${_major_tag}" --repo ${REPO} --cleanup-tag -y || echo "No major version tag to delete"
 
-          echo "Creating major version tag ${_major_tag} for commit ${_commit_sha}..."
-          gh release create "${_major_tag}" --repo ${REPO} --target "${_commit_sha}" --generate-notes --latest
+          echo "Creating major version tag ${_major_tag} for commit ${COMMIT_SHA}..."
+          gh release create "${_major_tag}" --repo ${REPO} --target ${COMMIT_SHA} --generate-notes --latest
