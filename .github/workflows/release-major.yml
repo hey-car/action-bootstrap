@@ -1,14 +1,10 @@
 ---
 name: Update major version tag
 
-# on:
-#   push:
-#     tags:
-#       - 'v[0-9]+.[0-9]+.[0-9]+'
-
 on:
-  pull_request:
-    types: [opened, synchronize, reopened]
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
 
 jobs:
   major-version-tag:
@@ -19,19 +15,15 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.VERSIONING_TOKEN }}
           REPO: ${{ github.repository }}
-          TAG: ${{ github.event.release.tag_name }}
+          TAG: "${{ github.event.push.ref }}"
         run: |
-          # _major_tag="$(echo ${TAG} | cut -d. -f1)"
-          # _commit_sha="${{ github.event.release.target_commitish }}"
+          _clean_tag="$(echo ${TAG} | cut -d/ -f3)"
+          _major_tag="$(echo ${_clean_tag} | cut -d. -f1)"
+          _commit_sha="${{ github.event.push.after }}"
 
-          _major_tag="v1"
-          _commit_sha="eeed1486b55de3d128ec8a3ff5131613c5f9fe8b"
-
-          # delete major version tag if exists
-          echo "Attempting to delete major version tag ${TAG}..."
+          echo "Attempting to delete major version tag ${_major_tag}..."
           gh release delete "${_major_tag}" --repo ${REPO} --cleanup-tag -y || echo "No major version tag to delete"
 
           echo "Creating major version tag ${_major_tag} for commit ${_commit_sha}..."
           gh release create "${_major_tag}" --repo ${REPO} --target "${_commit_sha}" --generate-notes --latest
           
-
