@@ -14,6 +14,10 @@ inputs:
     required: false
     description: the name of the docker image to configure
     default: ''
+  cache-registry-name:
+    required: false
+    description: the name of the docker registry to use for caching
+    default: ''
   ecr-login:
     required: false
     description: 'Set to false to not login to ECR'
@@ -56,6 +60,12 @@ outputs:
   docker-tags:
     description: 'The tags of the docker image'
     value: '${{ steps.meta.outputs.tags }}'
+  docker-cache-input:
+    description: 'The tags of the docker image'
+    value: '${{ steps.caching-config.outputs.docker-cache-input }}'
+  docker-cache-output:
+    description: 'The tags of the docker image'
+    value: '${{ steps.caching-config.outputs.docker-cache-output }}'
 
 
 runs:
@@ -97,6 +107,23 @@ runs:
           echo "ecr-repo-name=${{inputs.aws-account-id}}.dkr.ecr.${{ inputs.aws-region }}.amazonaws.com/alpha-image/${{ inputs.ecr-repo-name }}" >>"${GITHUB_OUTPUT}" 
         else
           echo "ecr-repo-name=${{inputs.aws-account-id}}.dkr.ecr.${{ inputs.aws-region }}.amazonaws.com/image/${{ inputs.ecr-repo-name }}" >>"${GITHUB_OUTPUT}" 
+        fi
+
+    - name: Caching Config
+      id: caching-config
+      shell: bash
+      if: inputs.run-tag-generator == 'true' && inputs.cache-registry-name != ''
+      run: |
+        if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+          if [[ "$(gh pr -R ${{github.repository}} view "${{ github.event.pull_request.number }}" --json commits -q '.commits | length' || true)" == "1" ]]; then
+            echo "docker-cache-input=${{ inputs.cache-registry-name }}/${{ inputs.ecr-repo-name }}:cache" >>"${GITHUB_OUTPUT}"
+          else
+            echo "docker-cache-input=${{ inputs.cache-registry-name }}/${{ inputs.ecr-repo-name }}:pr${{ github.event.pull_request.number }}-cache" >>"${GITHUB_OUTPUT}"
+          fi
+          echo "docker-cache-output=${{ inputs.cache-registry-name }}/${{ inputs.ecr-repo-name }}:pr${{ github.event.pull_request.number }}-cache" >>"${GITHUB_OUTPUT}"
+        else
+          echo "docker-cache-input=${{ inputs.cache-registry-name }}/${{ inputs.ecr-repo-name }}:cache" >>"${GITHUB_OUTPUT}"
+          echo "docker-cache-output=${{ inputs.cache-registry-name }}/${{ inputs.ecr-repo-name }}:cache" >>"${GITHUB_OUTPUT}"
         fi
 
     - name: Docker meta
