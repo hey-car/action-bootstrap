@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.12.0](https://github.com/hey-car/action-bootstrap/compare/v1.11.0...v1.12.0) (2024-04-19)
+
+
+### Features
+
+* added caching outputs ([#29](https://github.com/hey-car/action-bootstrap/issues/29)) ([8e324d5](https://github.com/hey-car/action-bootstrap/commit/8e324d5766274914815f045e42774cb36602e183))
+
 ## [1.11.0](https://github.com/hey-car/action-bootstrap/compare/v1.10.0...v1.11.0) (2024-04-16)
 
 
