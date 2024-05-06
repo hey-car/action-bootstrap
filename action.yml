@@ -129,7 +129,7 @@ runs:
     - name: Docker meta
       id: meta
       uses: docker/metadata-action@v5
-      if: ((!(github.event_name == 'pull_request' && (github.event.action == 'closed' || github.event.action == 'unlabeled'))) && inputs.run-tag-generator == 'true')
+      if: ((!(github.event_name == 'pull_request' && github.event.action == 'closed')) && inputs.run-tag-generator == 'true')
       with:
         images: |
           ${{ steps.img-name.outputs.ecr-repo-name }}
