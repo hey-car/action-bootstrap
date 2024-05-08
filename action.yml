@@ -58,6 +58,9 @@ outputs:
   ecr-repo-name:
     description: 'The generated ECR repository name'
     value: '${{ steps.img-name.outputs.ecr-repo-name }}'
+  ecr-helm-repo-name:
+    description: 'The generated ECR Helm repository name'
+    value: '${{ steps.img-name.outputs.ecr-helm-repo-name }}'
   app-version:
     description: 'The current project version'
     value: '${{ steps.meta.outputs.version }}'
