@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.13.0](https://github.com/hey-car/action-bootstrap/compare/v1.12.0...v1.13.0) (2024-05-08)
+
+
+### Features
+
+* **TECH:** helm chart support ([2669dd1](https://github.com/hey-car/action-bootstrap/commit/2669dd1042e2e006aeb4fdec359d7a5ab7c8d80b))
+
 ## [1.12.0](https://github.com/hey-car/action-bootstrap/compare/v1.11.0...v1.12.0) (2024-04-19)
 
 
