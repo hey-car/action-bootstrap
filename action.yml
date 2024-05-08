@@ -129,7 +129,7 @@ runs:
       run: |
         if [[ "${{ github.event_name }}" == "pull_request" ]]; then
           echo "ecr-helm-repo-name=${{inputs.aws-account-id}}.dkr.ecr.${{ inputs.aws-region }}.amazonaws.com/alpha-chart/${{ inputs.ecr-repo-name }}" >>"${GITHUB_OUTPUT}"
-          echo "ecr-helm-chart-registry=${{inputs.aws-account-id}}.dkr.ecr.${{ inputs.aws-region }}.amazonaws.com/alpha-chart}" >>"${GITHUB_OUTPUT}"
+          echo "ecr-helm-chart-registry=${{inputs.aws-account-id}}.dkr.ecr.${{ inputs.aws-region }}.amazonaws.com/alpha-chart" >>"${GITHUB_OUTPUT}"
         else
           echo "ecr-helm-repo-name=${{inputs.aws-account-id}}.dkr.ecr.${{ inputs.aws-region }}.amazonaws.com/image/${{ inputs.ecr-repo-name }}" >>"${GITHUB_OUTPUT}"
           echo "ecr-helm-chart-registry=${{inputs.aws-account-id}}.dkr.ecr.${{ inputs.aws-region }}.amazonaws.com/chart" >>"${GITHUB_OUTPUT}"
