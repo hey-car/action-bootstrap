@@ -172,7 +172,7 @@ runs:
       if: ((!(github.event_name == 'pull_request' && (github.event.action == 'closed' || github.event.action == 'unlabeled'))) && inputs.run-helm-version-generator == 'true')
       with:
         images: |
-          ${{ steps.img-name.outputs.ecr-helm-repo-name }}
+          ${{ steps.chart-registry.outputs.ecr-helm-repo-name }}
         tags: |
           type=ref,event=branch
           type=ref,event=pr,prefix=v0.0.0-,suffix=-{{sha}}
