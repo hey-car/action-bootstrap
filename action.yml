@@ -10,6 +10,10 @@ inputs:
     description: Set to false to not run docker meta
     required: false
     default: 'true'
+  run-helm-version-generator:
+    description: Set to true to run docker meta for helm chart
+    required: false
+    default: 'false'
   ecr-repo-name:
     required: false
     description: the name of the docker image to configure
@@ -48,6 +52,9 @@ inputs:
     default: ''
 
 outputs:
+  ecr-registry:
+    description: 'The ECR registry'
+    value: '${{ steps.login-ecr.outputs.registry }}'
   ecr-repo-name:
     description: 'The generated ECR repository name'
     value: '${{ steps.img-name.outputs.ecr-repo-name }}'
@@ -66,6 +73,9 @@ outputs:
   docker-cache-output:
     description: 'The tags of the docker image'
     value: '${{ steps.caching-config.outputs.docker-cache-output }}'
+  helm-chart-version:
+    description: 'The semver for helm chart version'
+    value: '${{ steps.meta-helm.version }}'
 
 
 runs:
@@ -104,9 +114,11 @@ runs:
       if: inputs.run-tag-generator == 'true'
       run: |
         if [[ "${{ github.event_name }}" == "pull_request" ]]; then
-          echo "ecr-repo-name=${{inputs.aws-account-id}}.dkr.ecr.${{ inputs.aws-region }}.amazonaws.com/alpha-image/${{ inputs.ecr-repo-name }}" >>"${GITHUB_OUTPUT}" 
+          echo "ecr-repo-name=${{inputs.aws-account-id}}.dkr.ecr.${{ inputs.aws-region }}.amazonaws.com/alpha-image/${{ inputs.ecr-repo-name }}" >>"${GITHUB_OUTPUT}"
+          echo "ecr-helm-repo-name=${{inputs.aws-account-id}}.dkr.ecr.${{ inputs.aws-region }}.amazonaws.com/alpha-chart/${{ inputs.ecr-repo-name }}" >>"${GITHUB_OUTPUT}"
         else
-          echo "ecr-repo-name=${{inputs.aws-account-id}}.dkr.ecr.${{ inputs.aws-region }}.amazonaws.com/image/${{ inputs.ecr-repo-name }}" >>"${GITHUB_OUTPUT}" 
+          echo "ecr-repo-name=${{inputs.aws-account-id}}.dkr.ecr.${{ inputs.aws-region }}.amazonaws.com/image/${{ inputs.ecr-repo-name }}" >>"${GITHUB_OUTPUT}"
+          echo "ecr-helm-repo-name=${{inputs.aws-account-id}}.dkr.ecr.${{ inputs.aws-region }}.amazonaws.com/chart/${{ inputs.ecr-repo-name }}" >>"${GITHUB_OUTPUT}"
         fi
 
     - name: Caching Config
@@ -136,6 +148,20 @@ runs:
         tags: |
           type=ref,event=branch
           type=ref,event=pr,suffix=-{{sha}}
+          type=semver,pattern={{version}},prefix=v
+          type=semver,pattern={{major}}.{{minor}},prefix=v
+          type=semver,pattern={{major}},prefix=v
+
+    - name: Docker meta helm
+      id: meta-helm
+      uses: docker/metadata-action@v5
+      if: ((!(github.event_name == 'pull_request' && (github.event.action == 'closed' || github.event.action == 'unlabeled'))) && inputs.run-helm-version-generator == 'true')
+      with:
+        images: |
+          ${{ steps.img-name.outputs.ecr-helm-repo-name }}
+        tags: |
+          type=ref,event=branch
+          type=ref,event=pr,prefix=v0.0.0-,suffix=-{{sha}}
           type=semver,pattern={{version}},prefix=v
           type=semver,pattern={{major}}.{{minor}},prefix=v
           type=semver,pattern={{major}},prefix=v
