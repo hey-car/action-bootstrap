@@ -78,7 +78,7 @@ outputs:
     value: '${{ steps.caching-config.outputs.docker-cache-output }}'
   helm-chart-version:
     description: 'The semver for helm chart version'
-    value: '${{ steps.meta-helm.version }}'
+    value: '${{ steps.meta-helm.outputs.version }}'
 
 
 runs:
