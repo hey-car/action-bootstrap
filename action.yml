@@ -50,6 +50,10 @@ inputs:
     required: false
     description: 'The names of the secrets to pull values from'
     default: ''
+  parse-json-secrets:
+    required: false
+    description: 'Create an environment variable for each key-value pair'
+    default: 'true'
 
 outputs:
   ecr-registry:
@@ -104,7 +108,7 @@ runs:
       uses: aws-actions/aws-secretsmanager-get-secrets@v2
       with:
         secret-ids: ${{ inputs.secret-names }}
-        parse-json-secrets: true
+        parse-json-secrets: ${{ inputs.parse-json-secrets }}
 
     - name: Login to Amazon ECR
       id: login-ecr
