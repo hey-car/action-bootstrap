@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.14.0](https://github.com/hey-car/action-bootstrap/compare/v1.13.0...v1.14.0) (2024-07-09)
+
+
+### Features
+
+* make secret parsing configurable ([9e226b2](https://github.com/hey-car/action-bootstrap/commit/9e226b2ba5765c45d4e68fa08a3e57f5dd1cd731))
+
 ## [1.13.0](https://github.com/hey-car/action-bootstrap/compare/v1.12.0...v1.13.0) (2024-05-08)
 
 
