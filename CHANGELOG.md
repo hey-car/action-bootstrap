@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [1.14.1](https://github.com/hey-car/action-bootstrap/compare/v1.14.0...v1.14.1) (2024-07-15)
+
+
+### Bug Fixes
+
+* fixed detached head sha in docker meta ([#33](https://github.com/hey-car/action-bootstrap/issues/33)) ([a167f2d](https://github.com/hey-car/action-bootstrap/commit/a167f2da0e80572dd19934cafcaa9ce4a6a8dba3))
+
 ## [1.14.0](https://github.com/hey-car/action-bootstrap/compare/v1.13.0...v1.14.0) (2024-07-09)
 
 
