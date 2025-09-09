@@ -135,12 +135,6 @@ runs:
       if: inputs.codeartifact-token-gen == 'true'
       shell: bash
       run: |
-        set -euo pipefail
-        echo "Fetching CodeArtifact token..."
-        aws --version
-        # Debug to confirm AWS identity
-        aws sts get-caller-identity
-
         CODEARTIFACT_AUTH_TOKEN=$(aws codeartifact get-authorization-token \
           --domain "${{ inputs.codeartifact-domain }}" \
           --domain-owner "${{ inputs.aws-account-id }}" \
@@ -148,12 +142,6 @@ runs:
           --query authorizationToken \
           --output text)
 
-        if [[ -z "$CODEARTIFACT_AUTH_TOKEN" ]]; then
-          echo "ERROR: No token returned from CodeArtifact"
-          exit 1
-        fi
-
-        echo "Token fetched: $CODEARTIFACT_AUTH_TOKEN"
         echo "codeartifact_token=$CODEARTIFACT_AUTH_TOKEN" >> "$GITHUB_OUTPUT"
 
     - name: Image Name
