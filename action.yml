@@ -54,7 +54,7 @@ inputs:
     required: false
     description: 'Create an environment variable for each key-value pair'
     default: 'true'
-  gen-artifact-token:
+  codeartifact-token-gen:
     required: false
     description: 'Set to false to not generate a CodeArtifact auth token'
     default: 'false'
@@ -132,7 +132,7 @@ runs:
 
     - name: Amazon CodeArtifact Auth Token
       id: codeartifact-token
-      if: inputs.gen-artifact-token == 'true'
+      if: inputs.codeartifact-token-gen == 'true'
       shell: bash
       run: |
         set -euo pipefail
