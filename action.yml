@@ -57,11 +57,11 @@ inputs:
   codeartifact-domain:
     required: false
     description: 'The CodeArtifact Domain'
-    default: 'vwfs-ds'
+    default: ''
   codeartifact-region:
     required: false
     description: 'The CodeArtifact AWS Region'
-    default: 'eu-central-1'
+    default: ''
 
 outputs:
   ecr-registry:
