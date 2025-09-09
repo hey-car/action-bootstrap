@@ -135,13 +135,15 @@ runs:
       if: inputs.codeartifact-token == 'true'
       shell: bash
       run: |
+        aws codeartifact help
+
         CODEARTIFACT_AUTH_TOKEN=$(aws codeartifact get-authorization-token \
           --domain ${{ inputs.codeartifact-domain }} \
           --domain-owner ${{ inputs.aws-account-id }} \
           --region ${{ inputs.codeartifact-region }} \
           --query authorizationToken \
           --output text)
-        echo "TEST FETCH TOKEN: $CODEARTIFACT_AUTH_TOKEN"
+
         echo "codeartifact_token=$CODEARTIFACT_AUTH_TOKEN" >> "$GITHUB_OUTPUT"
 
     - name: Image Name
