@@ -54,10 +54,14 @@ inputs:
     required: false
     description: 'Create an environment variable for each key-value pair'
     default: 'true'
+  codeartifact-token:
+    required: false
+    description: 'Set to false to not generate a CodeArtifact auth token'
+    default: 'false'
   codeartifact-domain:
     required: false
     description: 'The CodeArtifact Domain'
-    default: ''
+    default: 'vwfs-ds'
   codeartifact-region:
     required: false
     description: 'The CodeArtifact AWS Region'
@@ -126,7 +130,7 @@ runs:
       if: inputs.ecr-login == 'true'
       uses: aws-actions/amazon-ecr-login@v2
 
-    - name: Amazon CodeArtifact Token
+    - name: Amazon CodeArtifact Auth Token
       id: codeartifact-token
       if: inputs.codeartifact-token == 'true'
       run: |
