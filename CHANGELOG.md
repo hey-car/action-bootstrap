@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.15.0](https://github.com/hey-car/action-bootstrap/compare/v1.14.1...v1.15.0) (2025-09-10)
+
+
+### Features
+
+* **TECH:** code artifact token ([8ebc675](https://github.com/hey-car/action-bootstrap/commit/8ebc675a48ac2c9943fa5884d170110d6e7b84b3))
+
 ### [1.14.1](https://github.com/hey-car/action-bootstrap/compare/v1.14.0...v1.14.1) (2024-07-15)
 
 
