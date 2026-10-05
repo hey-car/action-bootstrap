@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [1.15.1](https://github.com/hey-car/action-bootstrap/compare/v1.15.0...v1.15.1) (2026-10-05)
+
+
+### Bug Fixes
+
+* update actions to node24 releases ([61e0d32](https://github.com/hey-car/action-bootstrap/commit/61e0d32729fe98cd35eb6c5299c2c38f56d59f8c))
+
 ## [1.15.0](https://github.com/hey-car/action-bootstrap/compare/v1.14.1...v1.15.0) (2025-09-10)
 
 
