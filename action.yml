@@ -14,6 +14,10 @@ inputs:
     description: Set to true to run docker meta for helm chart
     required: false
     default: 'false'
+  floating-tags:
+    description: Set to true to also generate floating tags (branch name, vX, vX.Y, latest). These are incompatible with immutable ECR repositories
+    required: false
+    default: 'false'
   ecr-repo-name:
     required: false
     description: the name of the docker image to configure
@@ -194,12 +198,14 @@ runs:
       with:
         images: |
           ${{ steps.img-name.outputs.ecr-repo-name }}
+        flavor: |
+          latest=${{ inputs.floating-tags == 'true' && 'auto' || 'false' }}
         tags: |
-          type=ref,event=branch
+          type=ref,event=branch,enable=${{ inputs.floating-tags == 'true' }}
           type=ref,event=pr,suffix=-{{sha}}
           type=semver,pattern={{version}},prefix=v
-          type=semver,pattern={{major}}.{{minor}},prefix=v
-          type=semver,pattern={{major}},prefix=v
+          type=semver,pattern={{major}}.{{minor}},prefix=v,enable=${{ inputs.floating-tags == 'true' }}
+          type=semver,pattern={{major}},prefix=v,enable=${{ inputs.floating-tags == 'true' }}
 
     - name: Docker meta helm
       id: meta-helm
