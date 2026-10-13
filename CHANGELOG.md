@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.16.0](https://github.com/hey-car/action-bootstrap/compare/v1.15.1...v1.16.0) (2026-10-13)
+
+
+### Features
+
+* make floating image tags opt-in ([1c3a7f8](https://github.com/hey-car/action-bootstrap/commit/1c3a7f81e9ec2c3b8cadadf0ee95e0b981ef87d4))
+
 ### [1.15.1](https://github.com/hey-car/action-bootstrap/compare/v1.15.0...v1.15.1) (2026-10-05)
 
 
