@@ -202,7 +202,7 @@ runs:
           latest=${{ inputs.floating-tags == 'true' && 'auto' || 'false' }}
         tags: |
           type=ref,event=branch,enable=${{ inputs.floating-tags == 'true' }}
-          type=ref,event=pr,suffix=-{{sha}}
+          type=ref,event=pr,suffix=-{{sha}}-${{ github.run_number }}-${{ github.run_attempt }}
           type=semver,pattern={{version}},prefix=v
           type=semver,pattern={{major}}.{{minor}},prefix=v,enable=${{ inputs.floating-tags == 'true' }}
           type=semver,pattern={{major}},prefix=v,enable=${{ inputs.floating-tags == 'true' }}
